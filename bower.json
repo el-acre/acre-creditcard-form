@@ -1,0 +1,30 @@
+{
+  "name": "acre-creditcard-form",
+  "version": "1.0.7",
+  "authors": [
+    "Victor Hugo Marques <victorhm@outlook.com>"
+  ],
+  "description": "An element to create a simple credit card form.",
+  "keywords": [
+    "web-component",
+    "polymer",
+    "seed"
+  ],
+  "main": "acre-creditcard-form.html",
+  "license": "http://polymer.github.io/LICENSE.txt",
+  "homepage": "https://github.com/<USERNAME>/seed-element/",
+  "ignore": [
+    "/.*",
+    "/test/"
+  ],
+  "dependencies": {
+    "polymer": "Polymer/polymer#^1.2.0",
+    "gold-cc-cvc-input": "PolymerElements/gold-cc-cvc-input#^1.0.0",
+    "gold-cc-expiration-input": "PolymerElements/gold-cc-expiration-input#^1.0.0",
+    "gold-cc-input": "PolymerElements/gold-cc-input#^1.0.0",
+    "paper-input": "PolymerElements/paper-input#^1.1.10"
+  },
+  "devDependencies": {
+    "iron-component-page": "PolymerElements/iron-component-page#^1.0.0"
+  }
+}

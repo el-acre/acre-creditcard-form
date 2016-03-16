@@ -1,0 +1,112 @@
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../paper-input/paper-input.html">
+<link rel="import" href="../gold-cc-input/gold-cc-input.html">
+<link rel="import" href="../gold-cc-cvc-input/gold-cc-cvc-input.html">
+<link rel="import" href="../gold-cc-expiration-input/gold-cc-expiration-input.html">
+<link rel="import" href="../iron-flex-layout/iron-flex-layout-classes.html">
+
+<!--
+An element providing a solution to no problem in particular.
+
+Example:
+
+    <acre-creditcard-form></acre-creditcard-form>
+
+@demo demo/index.html
+@hero hero.svg
+-->
+
+<dom-module id="acre-creditcard-form">
+    <template>
+        <style is="custom-style" include="iron-flex iron-flex-alignment" />
+        <style>
+            :host {
+                display: block;
+                box-sizing: border-box;
+            }
+        </style>
+
+        <paper-input id="name" auto-validate required value="{{card.name}}" label="Nome (Igual ao Cartão)" on-change="_cardChanged"></paper-input>
+        <gold-cc-input id="number" auto-validate required card-type="{{card.type}}" value="{{card.number}}" label="Número do Cartão" on-change="_cardChanged"></gold-cc-input>
+        <div class="layout horizontal">
+            <gold-cc-expiration-input id="expiration" class="flex" style="margin-right: 5px" auto-validate required value="{{card.expiration}}" on-change="_cardChanged"></gold-cc-expiration-input>
+            <gold-cc-cvc-input id="cvc" class="flex" style="margin-left: 5px" auto-validate required value="{{card.cvc}}" card-type="[[card.type]]" on-change="_cardChanged"></gold-cc-cvc-input>
+        </div>
+
+    </template>
+
+    <script>
+        Polymer({
+      is: 'acre-creditcard-form',
+
+      properties: {
+       
+        card: {
+          type: Object,
+          value: function() {
+            return {
+              name: '',
+              number: '',
+              expiration: '',
+              cvc: '',
+              type: ''
+            };
+          }
+        },
+        
+        isValid: {
+            type: Boolean,
+            value: false
+        }
+      },
+
+      // Element Lifecycle
+
+      ready: function() {
+        // `ready` is called after all elements have been configured, but
+        // propagates bottom-up. This element's children are ready, but parents
+        // are not.
+        //
+        // This is the point where you should make modifications to the DOM (when
+        // necessary), or kick off any processes the element wants to perform.
+      },
+
+      attached: function() {
+        // `attached` fires once the element and its parents have been inserted
+        // into a document.
+        //
+        // This is a good place to perform any work related to your element's
+        // visual state or active behavior (measuring sizes, beginning animations,
+        // loading resources, etc).
+      },
+
+      detached: function() {
+        // The analog to `attached`, `detached` fires when the element has been
+        // removed from a document.
+        //
+        // Use this to clean up anything you did in `attached`.
+      },
+
+      // Element Behavior
+        /**
+        * The `ac-card-is-valid` event is fired when the card becomes valid
+        *
+        * @event ac-card-is-valid
+        * @detail {{card: card}}
+        */
+        _cardChanged: function(e) {
+            
+            var isValid = this.card.name && this.$.name.validate() &&
+                            this.card.number && this.$.number.validate() &&
+                            this.card.cvc && this.$.cvc.validate() &&
+                            this.card.expiration && this.$.expiration.validate();
+
+            if (isValid && this.isValid != isValid) {
+                this.fire("ac-card-is-valid", true);
+            }
+            this.isValid = isValid;
+        }
+
+    });
+    </script>
+</dom-module>
