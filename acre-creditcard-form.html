@@ -18,21 +18,29 @@ Example:
 
 <dom-module id="acre-creditcard-form">
     <template>
-        <style is="custom-style" include="iron-flex iron-flex-alignment" />
+        <style include="iron-flex iron-flex-alignment"></style>
         <style>
             :host {
                 display: block;
                 box-sizing: border-box;
             }
+            
+            .container {
+                @apply(--layout-vertical);
+            }
         </style>
 
-        <paper-input id="name" auto-validate required value="{{card.name}}" label="Nome (Igual ao Cartão)" on-change="_cardChanged"></paper-input>
-        <gold-cc-input id="number" auto-validate required card-type="{{card.type}}" value="{{card.number}}" label="Número do Cartão" on-change="_cardChanged"></gold-cc-input>
-        <div class="layout horizontal">
-            <gold-cc-expiration-input id="expiration" class="flex" style="margin-right: 5px" auto-validate required value="{{card.expiration}}" on-change="_cardChanged"></gold-cc-expiration-input>
-            <gold-cc-cvc-input id="cvc" class="flex" style="margin-left: 5px" auto-validate required value="{{card.cvc}}" card-type="[[card.type]]" on-change="_cardChanged"></gold-cc-cvc-input>
+        <div class="container">
+            <paper-input id="name" class="flex" auto-validate required value="{{card.name}}" label="Nome (Igual ao Cartão)" on-change="_cardChanged"></paper-input>
+            <gold-cc-input id="number" class="flex" auto-validate required card-type="{{card.type}}" value="{{card.number}}" label="Número do Cartão"
+            on-change="_cardChanged"></gold-cc-input>
+            <div class="layout horizontal">
+                <gold-cc-expiration-input id="expiration" class="flex" style="margin-right: 5px" auto-validate required value="{{card.expiration}}"
+                on-change="_cardChanged"></gold-cc-expiration-input>
+                <gold-cc-cvc-input id="cvc" class="flex" style="margin-left: 5px" auto-validate required value="{{card.cvc}}" card-type="[[card.type]]"
+                on-change="_cardChanged"></gold-cc-cvc-input>
+            </div>
         </div>
-
     </template>
 
     <script>
@@ -96,16 +104,29 @@ Example:
         */
         _cardChanged: function(e) {
             
-            var isValid = this.card.name && this.$.name.validate() &&
-                            this.card.number && this.$.number.validate() &&
-                            this.card.cvc && this.$.cvc.validate() &&
-                            this.card.expiration && this.$.expiration.validate();
+            var isValid = this.validate();
 
             if (isValid && this.isValid != isValid) {
                 this.fire("ac-card-is-valid", true);
             }
             this.isValid = isValid;
-        }
+        },
+        
+        /** Events */
+
+        /**
+         * Validate()
+         * validate the data highlighting the errors!
+         *
+         */
+        validate: function(){
+            var isValid = this.$.name.validate() && this.card.name != "" &&
+                        this.$.number.validate() && this.card.number != "" &&
+                        this.$.expiration.validate() && this.card.expiration != "" &&
+                        this.$.cvc.validate() && this.card.cvc != "" ;
+            
+                return isValid;
+        },
 
     });
     </script>

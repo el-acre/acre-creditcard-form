@@ -20,16 +20,27 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
 <body unresolved>
 
-    <acre-creditcard-form>
+    <p>An example of <code>&lt;acre-creditcard-form&gt;</code>:</p>
+    <p>Validate Form!
+        <button id="validateBtn">Validate</button>
+    </p>
+
+
+    <acre-creditcard-form style="width:300px">
     </acre-creditcard-form>
 
     <script>
         var seedElement = document.querySelector('acre-creditcard-form');
 
-    //   document.querySelector('#saybtn').addEventListener('click', function() {
-    //     alert(seedElement.sayHello('Hallo!'));
-    //   });
-
+      document.querySelector('#validateBtn').addEventListener('click', function() {
+        var isValid = seedElement.validate();
+         alert("valid: " + isValid);
+      });
+      
+      
+      seedElement.addEventListener('ac-card-is-valid', function(e){
+          console.log("IS VALID", e);
+      });
     //   document.querySelector('#laserbtn').addEventListener('click', function() {
     //     seedElement.fireLasers();
     //   });
