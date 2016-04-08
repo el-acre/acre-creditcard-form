@@ -14,8 +14,16 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
     <title>acre-creditcard-form Demo</title>
-    <script src="../../webcomponentsjs/webcomponents-lite.min.js"></script>
+    <script src="../../webcomponentsjs/webcomponents.js"></script>
+    <script>
+        /* this script must run before Polymer is imported */
+    window.Polymer = {
+      dom : 'shadow',
+      lazyRegister: true
+    };
+    </script>
     <link rel="import" href="../acre-creditcard-form.html">
+    <link rel="import" href="../metheora-styles.html">
 </head>
 
 <body unresolved>
@@ -26,18 +34,18 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     </p>
 
 
-    <acre-creditcard-form style="width:300px">
+    <acre-creditcard-form>
     </acre-creditcard-form>
 
-    <script>
+  <script>
         var seedElement = document.querySelector('acre-creditcard-form');
 
       document.querySelector('#validateBtn').addEventListener('click', function() {
         var isValid = seedElement.validate();
          alert("valid: " + isValid);
       });
-      
-      
+
+
       seedElement.addEventListener('ac-card-is-valid', function(e){
           console.log("IS VALID", e);
       });

@@ -3,7 +3,9 @@
 <link rel="import" href="../gold-cc-input/gold-cc-input.html">
 <link rel="import" href="../gold-cc-cvc-input/gold-cc-cvc-input.html">
 <link rel="import" href="../gold-cc-expiration-input/gold-cc-expiration-input.html">
+<link rel="import" href="../gold-cc-expiration-input/date-input.html">
 <link rel="import" href="../iron-flex-layout/iron-flex-layout-classes.html">
+<link rel="import" href="../paper-input/paper-input-container.html">
 
 <!--
 An element providing a solution to no problem in particular.
@@ -17,55 +19,71 @@ Example:
 -->
 
 <dom-module id="acre-creditcard-form">
-    <template>
-        <style include="iron-flex iron-flex-alignment"></style>
-        <style>
-            :host {
-                display: block;
-                box-sizing: border-box;
-            }
-            
-            .container {
-                @apply(--layout-vertical);
-            }
-        </style>
+  <template>
+    <style include="iron-flex iron-flex-alignment"></style>
+    <style>
+      :host {
+        display: block;
+        box-sizing: border-box;
+      }
 
-        <div class="container">
-            <paper-input id="name" class="flex" auto-validate required value="{{card.name}}" label="Nome (Igual ao Cartão)" on-change="_cardChanged"></paper-input>
-            <gold-cc-input id="number" class="flex" auto-validate required card-type="{{card.type}}" value="{{card.number}}" label="Número do Cartão"
-            on-change="_cardChanged"></gold-cc-input>
-            <div class="layout horizontal">
-                <gold-cc-expiration-input id="expiration" class="flex" style="margin-right: 5px" auto-validate required value="{{card.expiration}}"
-                on-change="_cardChanged"></gold-cc-expiration-input>
-                <gold-cc-cvc-input id="cvc" class="flex" style="margin-left: 5px" auto-validate required value="{{card.cvc}}" card-type="[[card.type]]"
-                on-change="_cardChanged"></gold-cc-cvc-input>
-            </div>
-        </div>
-    </template>
+      .container {
+        @apply(--layout-vertical);
+      }
 
-    <script>
-        Polymer({
+      date-input {
+        border: none!important;
+        padding: 0!important;
+      }
+
+      gold-cc-input,
+      gold-cc-cvc-input {
+        --paper-input-container-input: {
+          @apply(--gold-input-container-input);
+        }
+      }
+
+    </style>
+
+    <div class="container">
+      <paper-input id="name" class="flex" auto-validate required value="{{card.name}}" label="Nome (Igual ao Cartão)" on-change="_cardChanged"></paper-input>
+      <gold-cc-input id="number" class="flex" auto-validate required card-type="{{card.type}}" value="{{card.number}}" label="Número do Cartão" on-change="_cardChanged"></gold-cc-input>
+      <div class="layout horizontal">
+
+        <paper-input-container id="" class="flex" style="margin-right: 5px" always-float-label attr-for-value="date">
+          <label>Valido até</label>
+          <date-input id="expiration" class="paper-input-input" on-change="_cardChanged" date="{{card.expiration}}" required></date-input>
+        </paper-input-container>
+
+        <gold-cc-cvc-input id="cvc" class="flex" style="margin-left: 5px" auto-validate required value="{{card.cvc}}" card-type="amex" on-change="_cardChanged"></gold-cc-cvc-input>
+      </div>
+    </div>
+  </template>
+
+  <script>
+    Polymer({
       is: 'acre-creditcard-form',
 
       properties: {
-       
+
         card: {
           type: Object,
+          notify: true,
           value: function() {
             return {
               name: '',
               number: '',
               expiration: '',
               cvc: '',
-              type: ''
+              type: 'amex'
             };
           }
         },
-        
+
         isValid: {
-            type: Boolean,
-            value: false
-        }
+          type: Boolean,
+          value: false
+        },
       },
 
       // Element Lifecycle
@@ -96,38 +114,38 @@ Example:
       },
 
       // Element Behavior
-        /**
-        * The `ac-card-is-valid` event is fired when the card becomes valid
-        *
-        * @event ac-card-is-valid
-        * @detail {{card: card}}
-        */
-        _cardChanged: function(e) {
-            
-            var isValid = this.validate();
+      /**
+       * The `ac-card-is-valid` event is fired when the card becomes valid
+       *
+       * @event ac-card-is-valid
+       * @detail {{card: card}}
+       */
+      _cardChanged: function(e) {
 
-            if (isValid && this.isValid != isValid) {
-                this.fire("ac-card-is-valid", true);
-            }
-            this.isValid = isValid;
-        },
-        
-        /** Events */
+        var isValid = this.validate();
 
-        /**
-         * Validate()
-         * validate the data highlighting the errors!
-         *
-         */
-        validate: function(){
-            var isValid = this.$.name.validate() && this.card.name != "" &&
-                        this.$.number.validate() && this.card.number != "" &&
-                        this.$.expiration.validate() && this.card.expiration != "" &&
-                        this.$.cvc.validate() && this.card.cvc != "" ;
-            
-                return isValid;
-        },
+        if (isValid && this.isValid != isValid) {
+          this.fire("ac-card-is-valid", true);
+        }
+        this.isValid = isValid;
+      },
+
+      /** Events */
+
+      /**
+       * Validate()
+       * validate the data highlighting the errors!
+       *
+       */
+      validate: function() {
+        var isValid = this.$.name.validate() && this.card.name != "" &&
+          this.$.number.validate() && this.card.number != "" &&
+          this.$.expiration.validate() && this.card.expiration != "" &&
+          this.$.cvc.validate() && this.card.cvc != "";
+
+        return isValid;
+      },
 
     });
-    </script>
+  </script>
 </dom-module>

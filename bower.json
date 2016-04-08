@@ -19,9 +19,9 @@
   ],
   "dependencies": {
     "polymer": "Polymer/polymer#^1.2.0",
-    "gold-cc-cvc-input": "PolymerElements/gold-cc-cvc-input#^1.0.0",
+    "gold-cc-cvc-input": "https://github.com/victorhugom/gold-cc-cvc-input.git#master",
     "gold-cc-expiration-input": "PolymerElements/gold-cc-expiration-input#^1.0.0",
-    "gold-cc-input": "PolymerElements/gold-cc-input#^1.0.0",
+    "gold-cc-input": "https://github.com/victorhugom/gold-cc-input.git#master",
     "paper-input": "PolymerElements/paper-input#^1.1.10"
   },
   "devDependencies": {
