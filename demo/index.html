@@ -11,44 +11,44 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <html>
 
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
-    <title>acre-creditcard-form Demo</title>
-    <script src="../../webcomponentsjs/webcomponents.js"></script>
-    <script>
-        /* this script must run before Polymer is imported */
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <title>acre-creditcard-form Demo</title>
+  <script src="../../webcomponentsjs/webcomponents.js"></script>
+  <script>
+    /* this script must run before Polymer is imported */
     window.Polymer = {
-      dom : 'shadow',
+      dom: 'shadow',
       lazyRegister: true
     };
-    </script>
-    <link rel="import" href="../acre-creditcard-form.html">
-    <link rel="import" href="../metheora-styles.html">
+  </script>
+  <link rel="import" href="../acre-creditcard-form.html">
+  <link rel="import" href="../metheora-styles.html">
 </head>
 
 <body unresolved>
 
-    <p>An example of <code>&lt;acre-creditcard-form&gt;</code>:</p>
-    <p>Validate Form!
-        <button id="validateBtn">Validate</button>
-    </p>
+  <p>An example of <code>&lt;acre-creditcard-form&gt;</code>:</p>
+  <p>Validate Form!
+    <button id="validateBtn">Validate</button>
+  </p>
 
 
-    <acre-creditcard-form>
-    </acre-creditcard-form>
+  <acre-creditcard-form>
+  </acre-creditcard-form>
 
   <script>
-        var seedElement = document.querySelector('acre-creditcard-form');
+    var seedElement = document.querySelector('acre-creditcard-form');
 
-      document.querySelector('#validateBtn').addEventListener('click', function() {
-        var isValid = seedElement.validate();
-         alert("valid: " + isValid);
-      });
+    document.querySelector('#validateBtn').addEventListener('click', function() {
+      var isValid = seedElement.validate();
+      alert("valid: " + isValid);
+    });
 
 
-      seedElement.addEventListener('ac-card-is-valid', function(e){
-          console.log("IS VALID", e);
-      });
+    seedElement.addEventListener('ac-card-is-valid', function(e) {
+      console.log("IS VALID", e);
+    });
     //   document.querySelector('#laserbtn').addEventListener('click', function() {
     //     seedElement.fireLasers();
     //   });
@@ -56,7 +56,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     //   document.addEventListener("acre-creditcard-form-lasers", function(e) {
     //     console.log(e.detail.sound);
     //   });
-    </script>
+  </script>
 
 </body>
 
