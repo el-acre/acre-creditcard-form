@@ -21,8 +21,8 @@
     "polymer": "Polymer/polymer#^1.2.0",
     "gold-cc-expiration-input": "PolymerElements/gold-cc-expiration-input#^1.0.0",
     "paper-input": "PolymerElements/paper-input#^1.1.10",
-    "gold-cc-input": "PolymerElements/gold-cc-input#master",
-    "gold-cc-cvc-input": "https://github.com/victorhugom/gold-cc-cvc-input.git#master"
+    "gold-cc-cvc-input": "PolymerElements/gold-cc-cvc-input#master",
+    "gold-cc-input": "PolymerElements/gold-cc-input#master"
   },
   "devDependencies": {
     "iron-component-page": "PolymerElements/iron-component-page#^1.0.0"

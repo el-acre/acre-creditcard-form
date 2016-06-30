@@ -1,11 +1,19 @@
-<link rel="import" href="../polymer/polymer.html">
-<link rel="import" href="../paper-input/paper-input.html">
-<link rel="import" href="../gold-cc-input/gold-cc-input.html">
-<link rel="import" href="../gold-cc-cvc-input/gold-cc-cvc-input.html">
-<link rel="import" href="../gold-cc-expiration-input/gold-cc-expiration-input.html">
-<link rel="import" href="../gold-cc-expiration-input/date-input.html">
-<link rel="import" href="../iron-flex-layout/iron-flex-layout-classes.html">
-<link rel="import" href="../paper-input/paper-input-container.html">
+<link rel="import"
+    href="../polymer/polymer.html">
+<link rel="import"
+    href="../paper-input/paper-input.html">
+<link rel="import"
+    href="../gold-cc-input/gold-cc-input.html">
+<link rel="import"
+    href="../gold-cc-cvc-input/gold-cc-cvc-input.html">
+<link rel="import"
+    href="../gold-cc-expiration-input/gold-cc-expiration-input.html">
+<link rel="import"
+    href="../gold-cc-expiration-input/date-input.html">
+<link rel="import"
+    href="../iron-flex-layout/iron-flex-layout-classes.html">
+<link rel="import"
+    href="../paper-input/paper-input-container.html">
 
 <!--
 An element providing a solution to no problem in particular.
@@ -45,16 +53,48 @@ Example:
     </style>
 
     <div class="container">
-      <paper-input id="name" class="flex" auto-validate required value="{{card.name}}" label="Nome (Igual ao Cartão)" on-change="_cardChanged" always-float-label=[[alwaysFloatLabel]]></paper-input>
-      <gold-cc-input id="number" class="flex" auto-validate required card-type="{{card.type}}" value="{{card.number}}" label="Número do Cartão" on-change="_cardChanged" always-float-label=[[alwaysFloatLabel]]></gold-cc-input>
+      <paper-input id="name"
+          class="flex"
+          auto-validate
+          required
+          value="{{card.name}}"
+          label="Nome (Igual ao Cartão)"
+          on-change="_cardChanged"
+          always-float-label=[[alwaysFloatLabel]]></paper-input>
+      <gold-cc-input id="number"
+          class="flex"
+          auto-validate
+          required
+          card-type="{{card.type}}"
+          value="{{card.number}}"
+          label="Número do Cartão"
+          on-change="_cardChanged"
+          always-float-label=[[alwaysFloatLabel]]></gold-cc-input>
       <div class="layout horizontal">
 
-        <paper-input-container id="" class="flex" style="margin-right: 5px" always-float-label attr-for-value="date" always-float-label=[[alwaysFloatLabel]]>
+        <paper-input-container id=""
+            class="flex"
+            style="margin-right: 5px"
+            always-float-label
+            attr-for-value="date"
+            always-float-label=[[alwaysFloatLabel]]>
           <label>Valido até</label>
-          <date-input id="expiration" class="paper-input-input" on-change="_cardChanged" date="{{card.expiration}}" required></date-input>
+          <date-input id="expiration"
+              class="paper-input-input"
+              on-change="_cardChanged"
+              date="{{card.expiration}}"
+              required></date-input>
         </paper-input-container>
 
-        <gold-cc-cvc-input id="cvc" class="flex" style="margin-left: 5px" auto-validate required value="{{card.cvc}}" card-type="[[card.type]]" on-change="_cardChanged" always-float-label=[[alwaysFloatLabel]]></gold-cc-cvc-input>
+        <gold-cc-cvc-input id="cvc"
+            class="flex"
+            style="margin-left: 5px"
+            auto-validate
+            required
+            value="{{card.cvc}}"
+            card-type="[[card.type]]"
+            on-change="_cardChanged"
+            always-float-label=[[alwaysFloatLabel]]></gold-cc-cvc-input>
       </div>
     </div>
   </template>
